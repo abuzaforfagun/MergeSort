@@ -1,20 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MergeSort
 {
-    public class MergeSortInput
+    public class MergeSortUtil
     {
-        public static void DoMergeSort(int[] numbers)
+        private int[] _inputArray;
+
+        public MergeSortUtil(int[] inputArray)
         {
-            var sortestNumbers = MergeSort(numbers);
-            for (int i = 0; i < numbers.Length; i++)
+            _inputArray = inputArray;
+        }
+        public int[] Sort()
+        {
+            var sortestNumbers = MergeSort(_inputArray);
+            for (int i = 0; i < _inputArray.Length; i++)
             {
-                numbers[i] = sortestNumbers[i];
+                _inputArray[i] = sortestNumbers[i];
             }
+
+            return _inputArray;
         }
         private static int[] MergeSort(int[] numbers)
         {
@@ -43,7 +48,7 @@ namespace MergeSort
         {
             var result = new List<int>();
 
-            while (ListNotEmpty(left) && ListNotEmpty(right))
+            while (left.Count > 0 && right.Count > 0)
             {
                 if (left.First() <= right.First())
                 {
@@ -54,7 +59,7 @@ namespace MergeSort
                     MoveValueFromSourceToResult(right, result);
                 }
             }
-            if (ListNotEmpty(left))
+            if (left.Count > 0)
             {
                 MoveValueFromSourceToResult(left, result);
             }
@@ -65,15 +70,10 @@ namespace MergeSort
             return result.ToArray();
         }
 
-        private static bool ListNotEmpty(List<int> list)
+        private static void MoveValueFromSourceToResult(List<int> input, List<int> result)
         {
-            return list.Count > 0;
-        }
-
-        private static void MoveValueFromSourceToResult(List<int> list, List<int> result)
-        {
-            result.Add(list.First());
-            list.RemoveAt(0);
+            result.Add(input.First());
+            input.RemoveAt(0);
         }
     }
 }
