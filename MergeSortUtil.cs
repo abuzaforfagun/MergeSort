@@ -5,45 +5,28 @@ namespace MergeSort
 {
     public class MergeSortUtil
     {
-        private int[] _inputArray;
-
-        public MergeSortUtil(int[] inputArray)
+        public int[] Sort(int[] inputArray)
         {
-            _inputArray = inputArray;
-        }
-        public int[] Sort()
-        {
-            var sortestNumbers = MergeSort(_inputArray);
-            for (int i = 0; i < _inputArray.Length; i++)
+            if (inputArray.Length <= 1)
             {
-                _inputArray[i] = sortestNumbers[i];
-            }
-
-            return _inputArray;
-        }
-        private static int[] MergeSort(int[] numbers)
-        {
-            if(numbers.Length <= 1)
-            {
-                return numbers;
+                return inputArray;
             }
 
             var left = new List<int>();
             var right = new List<int>();
-            for (int i = 0; i < numbers.Length; i++)
+            for (int i = 0; i < inputArray.Length; i++)
             {
                 if (i % 2 == 0)
-                    left.Add(numbers[i]);
+                    left.Add(inputArray[i]);
                 else
-                    right.Add(numbers[i]);
+                    right.Add(inputArray[i]);
             }
 
-            left = MergeSort(left.ToArray()).ToList();
-            right = MergeSort(right.ToArray()).ToList();
+            left = Sort(left.ToArray()).ToList();
+            right = Sort(right.ToArray()).ToList();
 
             return Merge(left, right);
         }
-
         private static int[] Merge(List<int> left, List<int> right)
         {
             var result = new List<int>();
