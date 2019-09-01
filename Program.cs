@@ -9,9 +9,9 @@ namespace MergeSort
             int[] numbers = { 10, 22, 32, 11, 19, 9, 10, 22 };
             var sorter = new MergeSortUtil();
             var result = sorter.Sort(numbers);
-            for (int i = 0; i < result.Length; i++)
+            foreach (var _val in result)
             {
-                Console.Write(result[i] + " ");
+                Console.Write(_val + " ");
             }
             Console.Read();
         }
