@@ -6,6 +6,17 @@ namespace MergeSort.Tests
     public class MergeSortUtilTests
     {
         [Fact]
+        public void DoSort_Should_Return_FirstElement_For_SingleItemArray()
+        {
+            var util = new MergeSortUtil(true);
+            int[] inputs = { 10 };
+            int[] expectedResult = { 10 };
+
+            var result = util.Sort(inputs);
+
+            Assert.Equal(result, expectedResult);
+        }
+        [Fact]
         public void DoSort_Should_SortTheInputs_In_AscendingOrder()
         {
             var util = new MergeSortUtil(true);
