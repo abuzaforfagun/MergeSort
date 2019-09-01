@@ -1,10 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace MergeSort
 {
     public class MergeSortUtil
     {
+        private bool _isAscendingOrder = true;
+
+        public MergeSortUtil(bool isAscendingOrder)
+        {
+            _isAscendingOrder = isAscendingOrder;
+        }
         public int[] Sort(int[] inputArray)
         {
             if (inputArray.Length <= 1)
@@ -27,13 +34,13 @@ namespace MergeSort
 
             return Merge(left, right);
         }
-        private static int[] Merge(List<int> left, List<int> right)
+        private int[] Merge(List<int> left, List<int> right)
         {
             var result = new List<int>();
 
             while (left.Count > 0 && right.Count > 0)
             {
-                if (left.First() <= right.First())
+                if (checkMergeCondition(left, right))
                 {
                     MoveValueFromSourceToResult(left, result);
                 }
@@ -52,6 +59,8 @@ namespace MergeSort
             }
             return result.ToArray();
         }
+
+        private bool checkMergeCondition(List<int> left, List<int> right) => _isAscendingOrder ? left.First() <= right.First() : left.First() >= right.First();
 
         private static void MoveValueFromSourceToResult(List<int> input, List<int> result)
         {
